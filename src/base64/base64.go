@@ -53,13 +53,40 @@ func main() {
 		os.Exit(0)
 	}
 
-	if *decode {
-		d := base64.NewDecoder(base64.StdEncoding, os.Stdin)
-		defer os.Stdin.Close()
-		io.Copy(os.Stdout, d)
+	argsLen := len(opts.Args)
+
+	var (
+		reader io.ReadCloser
+		writer io.WriteCloser
+	)
+
+	if argsLen == 0 {
+		reader = os.Stdin
+		writer = os.Stdout
+	} else if argsLen == 1 {
+		file, err := os.Open(opts.Args[0])
+		if err != nil {
+			fmt.Print(err)
+			os.Exit(1)
+		}
+		reader = file
+		writer = os.Stdout
 	} else {
-		e := base64.NewEncoder(base64.StdEncoding, os.Stdout)
+		fmt.Printf(`base64: extra operand '%s'
+Try 'base64 --help' for more information.`, opts.Args[1])
+		os.Exit(1)
+	}
+
+	if *decode {
+		d := base64.NewDecoder(base64.StdEncoding, reader)
+		defer reader.Close()
+		defer writer.Close()
+		io.Copy(writer, d)
+	} else {
+		e := base64.NewEncoder(base64.StdEncoding, writer)
 		defer e.Close()
-		io.Copy(e, os.Stdin)
+		defer reader.Close()
+		defer writer.Close()
+		io.Copy(e, reader)
 	}
 }
