@@ -2,3 +2,7 @@ Thumbs.db
 .DS_Store
 
 bin/
+
+_vendor/pkg
+_vendor/src/**/.hg
+_vendor/src/**/.git
