@@ -64,12 +64,32 @@ func main() {
 		reader = os.Stdin
 		writer = os.Stdout
 	} else if argsLen == 1 {
-		file, err := os.Open(opts.Args[0])
-		if err != nil {
-			fmt.Print(err)
-			os.Exit(1)
+		filename := opts.Args[0]
+		if (filename == "-") {
+			reader = os.Stdin
+		} else {
+			file, err := os.Open(filename)
+			defer file.Close()
+			if err != nil {
+				if os.IsNotExist(err) {
+					fmt.Printf("base64: %s: No such file or directory", filename)
+					os.Exit(1)
+				}
+				fmt.Print(err)
+				os.Exit(1)
+			}
+
+			fi, err := os.Stat(filename)
+			if err != nil {
+				fmt.Print(err)
+				os.Exit(1)
+			}
+			if fi.Mode().IsDir() {
+				fmt.Print("base64: read error: Is a directory")
+				os.Exit(1)
+			}
+			reader = file
 		}
-		reader = file
 		writer = os.Stdout
 	} else {
 		fmt.Printf(`base64: extra operand '%s'
