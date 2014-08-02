@@ -1,9 +1,9 @@
 package main
 
 import (
+	"code.google.com/p/opts-go"
 	"encoding/base64"
 	"fmt"
-	"github.com/docopt/docopt-go"
 	"io"
 	"os"
 )
@@ -12,8 +12,7 @@ const (
 	version = `base64 (go coretuils) 0.1
 Packaged by Prabir Shrestha
 Copyright (c) 2014 Prabir Shrestha
-MIT
-This is free software: you are free to change and redistribute it.
+License MIT: This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 
 Written by Prabir Shrestha`
@@ -25,8 +24,8 @@ Base64 encode or decode FILE, or standard input, to standard output.
   -i, --ignore-garbage  when decoding, ignore non-alphabet characters
   -w, --wrap=COLS       wrap encoded lines after COLS character (default 76).
 
-	  --help     display this help and exit
-	  --version  output version information and exit
+      --help     display this help and exit
+      --version  output version information and exit
 
 With no FILE, or when FILE is -, read standard input.
 
@@ -37,14 +36,24 @@ from any other non-alphabet bytes in the encoded stream.`
 )
 
 func main() {
-	arguments, err := docopt.Parse(usage, nil, true, version, false)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+	opts.Usage = usage
+	showHelp := opts.Flag("", "--help", "Help")
+	showVersion := opts.Flag("", "--version", "Version")
+	decode := opts.Flag("-d", "--decode", "Decode")
+
+	opts.Parse()
+
+	if *showHelp {
+		fmt.Print(usage)
+		os.Exit(0)
 	}
 
-	var decode = arguments["-d"].(bool)
-	if decode {
+	if *showVersion {
+		fmt.Print(version)
+		os.Exit(0)
+	}
+
+	if *decode {
 		d := base64.NewDecoder(base64.StdEncoding, os.Stdin)
 		defer os.Stdin.Close()
 		io.Copy(os.Stdout, d)
