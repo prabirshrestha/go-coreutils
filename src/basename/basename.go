@@ -65,7 +65,7 @@ Try 'basename --help' for more information.`)
 		}
 	} else {
 		fmt.Printf(`basename: extra operand '%s'
-Try 'basename --help for more information.'`, opts.Args[2])
+Try 'basename --help' for more information.'`, opts.Args[2])
 		os.Exit(1)
 	}
 }
