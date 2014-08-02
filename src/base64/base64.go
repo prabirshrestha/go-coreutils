@@ -44,7 +44,7 @@ func main() {
 	}
 
 	var decode = arguments["-d"].(bool)
-	if decode == true {
+	if decode {
 		d := base64.NewDecoder(base64.StdEncoding, os.Stdin)
 		defer os.Stdin.Close()
 		io.Copy(os.Stdout, d)
