@@ -1,5 +1,6 @@
 PROGRAMS := \
 	base64 \
+	basename \
 	env \
 	false \
 	logname \
@@ -25,7 +26,7 @@ endif
 all: $(PROGRAMS)
 
 $(foreach program, $(PROGRAMS), $(program)):
-	go build -o ./bin/$@$(EXEEXT) ./src/$@
+	gom build -o ./bin/$@$(EXEEXT) ./src/$@
 
 clean:
 	$(RMRF) bin
