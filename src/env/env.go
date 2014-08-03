@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	version = `env (go coretutils) 0.1
+	version = `env (go coreutils) 0.1
 Packaged by Prabir Shrestha
 Copyright (c) 2014 Prabir Shrestha
 License MIT: <http://opensource.org/licenses/MIT>

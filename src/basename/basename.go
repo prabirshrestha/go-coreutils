@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	version = `basename (go coretuils) 0.1
+	version = `basename (go coreutils) 0.1
 Packaged by Prabir Shrestha
 Copyright (c) 2014 Prabir Shrestha
 License MIT: <http://opensource.org/licenses/MIT>
