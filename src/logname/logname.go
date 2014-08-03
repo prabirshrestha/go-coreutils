@@ -1,18 +1,52 @@
 package main
 
 import (
-    "fmt"
-    "os"
-    "os/user"
+	"code.google.com/p/opts-go"
+	"fmt"
+	"os"
+	"os/user"
+)
+
+const (
+	version = `logname (go coreutils) 0.1
+Packaged by Prabir Shrestha
+Copyright (c) 2014 Prabir Shrestha
+License MIT: <http://opensource.org/licenses/MIT>
+This is free software: you are free to change and redistribute it
+There is NO WARRANTY, to the extent permitted by law.
+
+Written by Prabir Shrestha`
+
+	usage = `Usage: logname [OPTION]
+Print the name of the current user.
+
+      --help     display this help and exit
+      --version  output version information and exit`
 )
 
 func main() {
-    usr, err := user.Current()
+	opts.Usage = usage
+	showHelp := opts.Flag("", "--help", "Help")
+	showVersion := opts.Flag("", "--version", "Version")
 
-    if err != nil {
-        fmt.Println(err)
-        os.Exit(1)
-    }
+	opts.Parse()
 
-    fmt.Println(usr.Username)
+	if *showHelp {
+		fmt.Print(usage)
+		os.Exit(0)
+	}
+
+	if *showVersion {
+		fmt.Print(version)
+		os.Exit(0)
+	}
+
+	usr, err := user.Current()
+
+	if err != nil {
+		fmt.Print(err)
+		os.Exit(1)
+	}
+
+	fmt.Print(usr.Username)
 }
