@@ -65,7 +65,7 @@ func main() {
 		writer = os.Stdout
 	} else if argsLen == 1 {
 		filename := opts.Args[0]
-		if (filename == "-") {
+		if filename == "-" {
 			reader = os.Stdin
 		} else {
 			file, err := os.Open(filename)
