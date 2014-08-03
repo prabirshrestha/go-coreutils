@@ -12,7 +12,8 @@ const (
 	version = `basename (go coretuils) 0.1
 Packaged by Prabir Shrestha
 Copyright (c) 2014 Prabir Shrestha
-License MIT: This is free software: you are free to change and redistribute it.
+License MIT: <http://opensource.org/licenses/MIT>
+This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 
 Written by Prabir Shrestha`
