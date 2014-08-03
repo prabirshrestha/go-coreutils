@@ -88,11 +88,12 @@ func main() {
 	}
 
 	for _, file := range opts.Args {
-		var reader io.ReadCloser
+		var reader io.Reader
 		if file == "-" {
 			reader = os.Stdin
 		} else {
 			r, error := os.Open(file)
+			defer r.Close()
 			reader = r
 			if error != nil {
 				fmt.Print(error)
