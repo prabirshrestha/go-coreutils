@@ -1,6 +1,7 @@
 PROGRAMS := \
 	base64 \
 	basename \
+	cat \
 	env \
 	false \
 	logname \
