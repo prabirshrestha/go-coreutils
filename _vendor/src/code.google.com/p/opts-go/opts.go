@@ -346,7 +346,8 @@ func ParseArgs(args []string) {
 			switch {
 			case len(arg) == 1:
 				// blank option - end option parsing
-				optsOver = true
+				Args = Args[0 : len(Args)+1]
+				Args[len(Args)-1] = arg
 			case arg[1] == '-':
 				// long option
 				argparts := strings.SplitN(arg, "=", 2)
