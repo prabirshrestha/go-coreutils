@@ -2,6 +2,7 @@ PROGRAMS := \
 	base64 \
 	basename \
 	cat \
+	dirname \
 	env \
 	false \
 	logname \
