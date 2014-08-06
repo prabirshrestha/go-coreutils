@@ -46,7 +46,7 @@ func main() {
 		os.Exit(0)
 	}
 
-	env := os.Environ()[2:] // [1] -> working directory, [2] -> exit code; so skip these
+	env := os.Environ()[2:] // [0] -> working directory, [1] -> exit code; so skip these
 
 	for _, envar := range env {
 		if *zeroByte {
