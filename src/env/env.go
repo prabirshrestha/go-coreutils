@@ -48,11 +48,13 @@ func main() {
 
 	env := os.Environ()[2:] // [0] -> working directory, [1] -> exit code; so skip these
 
-	for _, envar := range env {
-		if *zeroByte {
+	if *zeroByte {
+		for _, envar := range env {
 			fmt.Print(envar)
 			fmt.Print("\x00")
-		} else {
+		}
+	} else {
+		for _, envar := range env {
 			fmt.Println(envar)
 		}
 	}
