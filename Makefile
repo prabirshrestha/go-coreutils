@@ -16,7 +16,8 @@ PROGRAMS := \
 	true \
 	uptime \
 	uuidgen \
-	whoami
+	whoami \
+	yes
 
 ifeq ($(OS),Windows_NT)
 	RMRF=rd /s /q
