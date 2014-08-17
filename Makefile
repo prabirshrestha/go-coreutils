@@ -15,6 +15,7 @@ PROGRAMS := \
 	sleep \
 	true \
 	uptime \
+	uuidgen \
 	whoami
 
 ifeq ($(OS),Windows_NT)
