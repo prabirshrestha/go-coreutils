@@ -1,0 +1,13 @@
+{
+	"ImportPath": "github.com/prabirshrestha/go-coreutils",
+	"GoVersion": "go1.4.1",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/timtadh/getopt",
+			"Rev": "5412d5844b7456ec73b0497762d5668448a892fd"
+		}
+	]
+}
