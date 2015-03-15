@@ -2,18 +2,9 @@
 
 Cross platform coreutils written in Go.
 
-# Prerequisites
-
-## Windows
+# installing
 
 ```bash
-choco install make
-go get github.com/mattn/gom
-```
-
-# Building
-
-```bash
-make
+get get -u github.com/prabirshrestha/go-coreutils/cmd/...
 ```
 
