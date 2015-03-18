@@ -11,6 +11,8 @@ import (
 )
 
 func main() {
+	quiet := false
+
 	args, optargs, err := GetOpt(os.Args[1:], "q:", nil)
 
 	if err != nil {
@@ -20,6 +22,7 @@ func main() {
 	for _, value := range optargs {
 		switch value.Opt() {
 		case "-q":
+			quiet = true
 		default:
 			usage()
 		}
@@ -50,7 +53,9 @@ func main() {
 		_, err = os.Stat(path)
 		if err != nil {
 			if os.IsNotExist(err) {
-				fmt.Println("realpath: " + originalValue + ": No such file or directory")
+				if !quiet {
+					fmt.Println("realpath: " + originalValue + ": No such file or directory")
+				}
 				continue
 			} else {
 				fmt.Println(err)
