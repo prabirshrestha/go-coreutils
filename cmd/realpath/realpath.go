@@ -30,6 +30,7 @@ func main() {
 	}
 
 	for _, value := range args {
+		originalValue := value
 		if value == "~" {
 			value = userHomeDir()
 		} else if strings.HasPrefix(value, "~/") {
@@ -44,6 +45,17 @@ func main() {
 
 		if strings.HasSuffix(path, "/") || strings.HasSuffix(path, "\\") {
 			path = path[0 : len(path)-1]
+		}
+
+		_, err = os.Stat(path)
+		if err != nil {
+			if os.IsNotExist(err) {
+				fmt.Println("realpath: " + originalValue + ": No such file or directory")
+				continue
+			} else {
+				fmt.Println(err)
+				continue
+			}
 		}
 
 		fmt.Println(path)
