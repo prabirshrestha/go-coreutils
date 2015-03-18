@@ -32,6 +32,8 @@ func main() {
 		args = []string{"."}
 	}
 
+	rvalue := 0
+
 	for _, value := range args {
 		originalValue := value
 		if value == "~" {
@@ -53,6 +55,7 @@ func main() {
 		_, err = os.Stat(path)
 		if err != nil {
 			if os.IsNotExist(err) {
+				rvalue = 1
 				if !quiet {
 					fmt.Println("realpath: " + originalValue + ": No such file or directory")
 				}
@@ -65,6 +68,8 @@ func main() {
 
 		fmt.Println(path)
 	}
+
+	os.Exit(rvalue)
 }
 
 func usage() {
